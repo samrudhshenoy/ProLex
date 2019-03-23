@@ -7,6 +7,7 @@ public class FileIO {
 	
 	public static final String lineSep = System.getProperty("line.separator");
 	public static final String fileSep = System.getProperty("file.separator");
+	public static final String valueSep = " - ";
 	/**0->offensive (general category, most common)
 	 * 1->racial (race)
 	 * 2->vulgar (sexual)
@@ -31,16 +32,60 @@ public class FileIO {
 			}
 			return lines;
 		}catch(IOException e) {
-			System.out.println(e.getStackTrace());
+			System.out.println("IOException");
 		}finally {
 			try {
 				reader.close();
 			}catch(IOException e) {
 				e.printStackTrace();
-			}	
+			}catch(NullPointerException e) {
+				e.printStackTrace();
+			}
 		}
 		return null;
 	}
+	
+	/**Takes in an arraylist of strings. For each string, will see if it's a valid input and then will parse if it is.
+	 * If the message is custom, this method will take off the '#' at the beginning and return just the message.
+	 * 
+	 * @param input
+	 * @return
+	 */
+	public static ArrayList<BadWord> readBadWords(ArrayList<String> input){
+		ArrayList<BadWord> badWords = new ArrayList<BadWord>();
+		while(!input.isEmpty()) {
+			String line = input.remove(0);
+			if(line=="\n") {
+				continue;
+			}else {//valid input
+				String badWord = line.substring(0, line.indexOf(" - "));
+				line = line.substring(line.indexOf(" - ")+3);
+				String replacement = line.substring(0, line.indexOf(" - "));
+				line = line.substring(line.indexOf(" - ")+3);
+				if(line.charAt(0) == '#') {
+					line = line.substring(1);
+				}
+				badWords.add(new BadWord(badWord,replacement,line));
+			}
+		}
+		return badWords;
+	}
+	
+	
+	public static String getMessage(int index) {
+		return null;
+	}
+	
+	public static ArrayList<Integer> parseForBadWords(String input) {
+		ArrayList<Integer> ints = new ArrayList<Integer>();
+		for(int i = 0; i < ProLexMain.badWords.size(); i++) {
+			if(input.contains(ProLexMain.badWords.get(i).getBadWord())) {
+				ints.add(input.indexOf(ProLexMain.badWords.get(i).getBadWord()));
+			}
+		}
+		return ints;
+	}
+	
 	/** 	
 	 * 
 	 * @param index
