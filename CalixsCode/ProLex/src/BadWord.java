@@ -12,10 +12,10 @@ public class BadWord {
 			if(n<0 || n>FileIO.messages.length - 1) {
 				throw new IllegalArgumentException("message number is invalid for badword.");
 			}else {
-				this.message = FileIO.messages[n];
+				this.message = FileIO.messages[n] + replacement;
 			}
 		}catch(NumberFormatException e) {
-			this.message = message;
+			this.message = message + replacement;
 		}
 	}
 	public String getBadWord() {
@@ -26,5 +26,8 @@ public class BadWord {
 	}
 	public String getMessage() {
 		return message;
+	}
+	public String toString() {
+		return "bad word: " + badWord + FileIO.lineSep + "replacement: " + replacement + FileIO.lineSep +  "message: " + message + FileIO.lineSep;
 	}
 }

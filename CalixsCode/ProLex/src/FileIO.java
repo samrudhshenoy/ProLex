@@ -14,7 +14,8 @@ public class FileIO {
 	 */
 	public static final String[] messages = {"This word has offensive connotations. Are you sure you want to use this word? Here is a replacement suggestion: ",
 			"This word can be interpreted as a racial slur. Are you sure you want to use this word? Here is a replacement suggestion: ",
-			"This word has vulgar connotations. Are you sure you want to use this word? Here is a replacement suggestion: "};
+			"This word has vulgar connotations. Are you sure you want to use this word? Here is a replacement suggestion: ",
+			"This word is offensive to the homosexual community. Are you sure you want to use this word? Here is a replacement word: "};
 	
 	/**Returns the lines of the file in an ArrayList
 	 * 
@@ -57,7 +58,9 @@ public class FileIO {
 			String line = input.remove(0);
 			if(line=="\n") {
 				continue;
-			}else {//valid input
+			}else if(!line.contains(" - ")){
+				continue;
+			}else {
 				String badWord = line.substring(0, line.indexOf(" - "));
 				line = line.substring(line.indexOf(" - ")+3);
 				String replacement = line.substring(0, line.indexOf(" - "));
@@ -72,15 +75,18 @@ public class FileIO {
 	}
 	
 	
-	public static String getMessage(int index) {
+	public static String getMessage(int index, String input) {
+		
 		return null;
 	}
 	
 	public static ArrayList<Integer> parseForBadWords(String input) {
 		ArrayList<Integer> ints = new ArrayList<Integer>();
 		for(int i = 0; i < ProLexMain.badWords.size(); i++) {
-			if(input.contains(ProLexMain.badWords.get(i).getBadWord())) {
+			int index = 0;
+			while(input.indexOf(ProLexMain.badWords.get(i).getBadWord(), index + 1) != -1) {
 				ints.add(input.indexOf(ProLexMain.badWords.get(i).getBadWord()));
+				index = input.indexOf(ProLexMain.badWords.get(i).getBadWord());
 			}
 		}
 		return ints;

@@ -5,9 +5,10 @@ public class ProLexMain {
 	public static ArrayList<BadWord> badWords;
 
 	public static void main(String[] args) {
-		ArrayList<String> strings = FileIO.readFile("C:\\Users\\Calix\\Desktop\\abc.txt");
-		for (String s : strings) {
-			System.out.print(s);
+		ArrayList<String> strings = FileIO.readFile("data\\def.txt");
+		badWords = FileIO.readBadWords(strings);
+		for(BadWord b : badWords) {
+			System.out.println(b);
 		}
 	}
 }
