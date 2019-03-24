@@ -86,17 +86,23 @@ public class FileIO {
 	 * @return
 	 */
 	public static ArrayList<BadWord> parseForBadWords(String input) {
-		input = input.toLowerCase();
 		ArrayList<BadWord> badWords = new ArrayList<BadWord>();
 		for(int i = 0; i < ProLexMain.badWords.size(); i++) {
 			int index = -1;
-			while(input.indexOf(ProLexMain.badWords.get(i).getBadWord(), index +1) != -1) {
-				badWords.add(new BadWord(ProLexMain.badWords.get(i),input.indexOf(ProLexMain.badWords.get(i).getBadWord(), index+1)));
-				//index = input.indexOf(ProLexMain.badWords.get(i).getBadWord());
-				index= input.indexOf(ProLexMain.badWords.get(i).getBadWord(), index)+ProLexMain.badWords.get(i).getBadWord().length();
+			while(input.indexOf(ProLexMain.badWords.get(i).getBadWord(), index + 1) != -1) {
+				badWords.add(new BadWord(ProLexMain.badWords.get(i),input.indexOf(ProLexMain.badWords.get(i).getBadWord())));
+				index = input.indexOf(ProLexMain.badWords.get(i).getBadWord());
 			}
 		}
 		return badWords;
 	}
 	
+	/** 	
+	 * 
+	 * @param index
+	 * @return
+	 */
+	public static String getReplacedWord(int index) {
+		return null;
+	}
 }
