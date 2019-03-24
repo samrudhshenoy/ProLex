@@ -14,10 +14,10 @@ public class BadWord {
 			if(n<0 || n>FileIO.messages.length - 1) {
 				throw new IllegalArgumentException("message number is invalid for badword.");
 			}else {
-				this.message = FileIO.messages[n] + replacement;
+				this.message = FileIO.messages[n];
 			}
 		}catch(NumberFormatException e) {
-			this.message = message + replacement;
+			this.message = message;
 		}
 	}
 	public BadWord(String badWord, String replacement, String message, int index) {
@@ -29,10 +29,10 @@ public class BadWord {
 			if(n<0 || n>FileIO.messages.length - 1) {
 				throw new IllegalArgumentException("message number is invalid for badword.");
 			}else {
-				this.message = FileIO.messages[n] + replacement;
+				this.message = FileIO.messages[n];
 			}
 		}catch(NumberFormatException e) {
-			this.message = message + replacement;
+			this.message = message;
 		}
 	}
 	public BadWord(BadWord b, int index) {
